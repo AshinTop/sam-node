@@ -1,0 +1,34 @@
+{
+  "name": "sam-node",
+  "version": "1.0.0",
+  "description": "山姆买菜nodejs自动下单脚本，支持邮件通知。",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sam",
+    "山姆买菜",
+    "nodejs",
+    "自动下单"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AshinTop/sam-node.git"
+  },
+  "author": "AshinTop",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AshinTop/sam-node/issues"
+  },
+  "homepage": "https://github.com/AshinTop/sam-node#readme",
+  "dependencies": {
+    "emailjs": "^3.8.1",
+    "axios": "^0.26.1",
+    "single-line-log": "^1.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.13.0"
+  }
+}
