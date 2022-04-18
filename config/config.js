@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 // 一、使用 charles 手机抓包，获取以下参数：
 const userConfig = {
   // -----------------------------------------------
@@ -41,4 +43,9 @@ const runConfig = {
   'maxTime': 10, // 单次运行最长时间,分钟
 }
 
-module.exports = { userConfig, emailConfig, runConfig };
+if (fs.existsSync(path.resolve(__dirname, './my.js'))) {
+  // 请忽略这部分，填写上面的config
+  module.exports = require('./my');
+} else {
+  module.exports = { userConfig, emailConfig, runConfig };
+}

@@ -1,4 +1,3 @@
-const log = require('single-line-log').stdout;
 const myAxios = require('./utils/myAxios')
 const { userConfig, emailConfig, runConfig } = require('./config/config');
 const { sendEmail } = require('./utils/sendEmail');

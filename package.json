@@ -25,8 +25,7 @@
   "homepage": "https://github.com/AshinTop/sam-node#readme",
   "dependencies": {
     "emailjs": "^3.8.1",
-    "axios": "^0.26.1",
-    "single-line-log": "^1.1.2"
+    "axios": "^0.26.1"
   },
   "devDependencies": {
     "eslint": "^8.13.0"
