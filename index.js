@@ -190,14 +190,14 @@ const order = async (startRealTime, endRealTime, goodsList, amount) => {
       logger(msg);
       setTimeout(() => {
         order(startRealTime, endRealTime, goodsList, amount)
-      }, 200)
+      }, runConfig.runInterval)
 
     }
   } catch (e) {
     logger('【下单失败了】')
     setTimeout(() => {
       order(startRealTime, endRealTime, goodsList, amount)
-    }, 200)
+    }, runConfig.runInterval)
   }
 }
 
