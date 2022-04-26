@@ -12,9 +12,9 @@ async function main () {
     exit(0);
     return;
   }
+  const mode = runConfig.isLoop ? '循环执行' : `定时执行，${runConfig.maxTime}分钟后自动停止`
+  logger(`开始运行，[模式]${mode}`);
   if (!runConfig.isLoop && runConfig.maxTime && runningTask === null) {
-    const mode = runConfig.isLoop ? '循环执行' : `定时执行，${runConfig.maxTime}分钟后自动停止`
-    logger(`开始运行，[模式]${mode}`);
     runningTask = setTimeout(() => {
       logger(`定时执行结束`);
       exit(0);
@@ -30,7 +30,6 @@ let runcount = {
   getCapacityDataCount: 0,
   orderCount: 0
 }
-
 // 重试过多，重新开始下单流程
 function isMaxCount (key) {
   runcount = {
@@ -39,7 +38,9 @@ function isMaxCount (key) {
     orderCount: 0
   }
   if (runcount[key] > runConfig.maxRunCount) {
-    main()
+    setTimeout(() => {
+      main()
+    }, runConfig.runInterval)
     return true
   } else {
     runcount[key]++
@@ -66,7 +67,11 @@ const getCart = async () => {
     let { floorInfoList } = ret.data.data;
     let { normalGoodsList, amount, quantity } = floorInfoList[0];
     if (amount == 0) {
-      getCart();
+      logger('【购物车】商品为空');
+
+      setTimeout(() => {
+        getCart();
+      }, runConfig.runInterval)
       return;
     }
     logger('【购物车】商品获取成功');
@@ -83,8 +88,10 @@ const getCart = async () => {
     buyItems = normalGoodsList.map(item => item.goodsName)
     getCapacityData(goodsList, amount);
   } catch (e) {
-    console.error('【购物车】商品获取失败', e);
-    getCart();
+    console.error('【购物车】商品获取失败');
+    setTimeout(() => {
+      getCart();
+    }, runConfig.runInterval)
   }
 }
 
@@ -118,7 +125,10 @@ const getCapacityData = async (goodsList, amount) => {
     order(startRealTime, endRealTime, goodsList, amount)
   } catch (error) {
     logger(`【获取配送时间失败】`, errorText || error);
-    getCapacityData(goodsList, amount);
+    setTimeout(() => {
+      getCapacityData(goodsList, amount);
+    }, runConfig.runInterval)
+
   }
 }
 
@@ -178,11 +188,16 @@ const order = async (startRealTime, endRealTime, goodsList, amount) => {
       });
     } else {
       logger(msg);
-      order(startRealTime, endRealTime, goodsList, amount)
+      setTimeout(() => {
+        order(startRealTime, endRealTime, goodsList, amount)
+      }, 200)
+
     }
   } catch (e) {
     logger('【下单失败了】')
-    order(startRealTime, endRealTime, goodsList, amount)
+    setTimeout(() => {
+      order(startRealTime, endRealTime, goodsList, amount)
+    }, 200)
   }
 }
 

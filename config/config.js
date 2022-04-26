@@ -37,7 +37,7 @@ const emailConfig = {
 // 三、 运行配置
 const runConfig = {
   'useLogger': true, // 是否开启logger 调试使用
-  'runInterval': 5000, // 每一个请求的轮询间隔(ms)
+  'runInterval': 30 * 000, // 每一个请求的轮询间隔(ms)
   'maxRunCount': 100,//每个请求的最大重复执行次数
   'isLoop': true, //是否循环执行，为true则一直循环运行直到下单成功，为false则根据maxTime超时则停止
   'maxTime': 10, // 单次运行最长时间,分钟

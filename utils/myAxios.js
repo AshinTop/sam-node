@@ -30,7 +30,7 @@ const myAxios = async (url, data, plus) => {
     headers,
     "track-info": plus
   });
-  await wait(runConfig.runInterval)
+  // await wait(runConfig.runInterval)
   return res
 }
 
